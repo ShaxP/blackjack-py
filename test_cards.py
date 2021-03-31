@@ -12,9 +12,9 @@ ace_of_club = [
     "`------´",
     ]
 
-eight_of_club = [
+ten_of_club = [
     ".------.",
-    "|8 __  |",
+    "|10__  |",
     "| (  ) |",
     "|(_  _)|",
     "| /__\\ |",
@@ -41,10 +41,10 @@ two_of_spade =[
 
 jack_of_diamond = [
     ".------.",
-    "|J /\\  |",
-    "| /  \\ |",
-    "| \\  / |",
-    "|  \\/  |",
+   r"|J /\  |",
+   r"| /  \ |",
+   r"| \  / |",
+   r"|  \/  |",
     "`------´",
 ]
 
@@ -77,7 +77,7 @@ nine_of_heart = [
 
 @pytest.mark.parametrize("suit,rank,to_compare", [
     (Suit.club, Rank.ace, ace_of_club),
-    (Suit.club, Rank.eight, eight_of_club),
+    (Suit.club, Rank.ten, ten_of_club),
     (Suit.spade, Rank.king, king_of_spade),
     (Suit.spade, Rank.two, two_of_spade),
     (Suit.diamond, Rank.jack, jack_of_diamond),
@@ -91,6 +91,5 @@ def test_insert_rank(suit, rank, to_compare):
     rows = suits[suit]
     # Act
     card_rows = screen.insert_rank(rows, rank)
-
     # Assert
     assert card_rows == to_compare
