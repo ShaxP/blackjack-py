@@ -42,4 +42,5 @@ def draw_cards(card_list):
         print(row)
 
 def print_logo():
+    clear()
     print(logo)

@@ -18,12 +18,43 @@ score_map = {
     }
 
 def calc_score(card_list: list) -> list:
-    ranks = list(map(lambda c: c.rank, card_list))
+    ranks = list(map(lambda c: c.rank, filter(lambda c: not c.conceiled, card_list)))
     return calc_score_by_ranks(ranks) 
 
 
 def calc_score_by_ranks(ranks: list) -> list:
     rank_values = list(map(lambda r: score_map[r], ranks))
     prods = list(product(*rank_values))
-    scores = list(map(lambda t: sum(t), prods))
+    scores = list(set(map(lambda t: sum(t), prods)))
+    scores.sort()
     return scores
+
+def formatted_score(card_list: list):
+    scores = calc_score(card_list)
+    if len(scores) == 0:
+        return "0"
+    elif len(scores) == 1:
+        return str(scores[0])
+    elif 21 in scores:
+        return "21"
+    else:
+        filtered = list(filter(lambda x: x<22, scores))
+        filtered.sort()
+        if len(filtered) == 0:
+            return str(min(scores))
+        else:
+            return ", ".join(map(lambda n: str(n), filtered))
+
+def final_score(card_list: list):
+    scores = calc_score(card_list)
+    if len(scores) == 0:
+        return 0
+    elif len(scores) == 1:
+        return scores[0]
+    else:
+        filtered = list(filter(lambda x: x<22, scores))
+        filtered.sort()
+        if len(filtered) == 0:
+            return min(scores)
+        else:
+            return max(filtered)

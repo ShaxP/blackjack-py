@@ -33,6 +33,12 @@ class Card:
     
     def reveal(self):
         self.conceiled = False
+    
+    def __eq__(self, other):
+        if isinstance(other, Card):
+            return self.suit == other.suit and self.rank == other.rank
+        else:
+            return False
 
 rank_map = {
     Rank.ace: 'A',
